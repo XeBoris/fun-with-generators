@@ -9,6 +9,8 @@ import logging
 import datetime
 
 
+import streamlit_authenticator as stauth
+
 # pre-init session states:
 #We safe the argparse object in the session_state for later use
 st.set_page_config(
@@ -20,15 +22,21 @@ st.set_page_config(
 )
 
 import pages.home
+import pages.page1
 import sitebars.basic
+import sitebars.site_page1
 
 PAGES = {
     "Home": pages.home,
+    "Page 1": pages.page1
 }
 
 SIDEBARS = {
     "basic": sitebars.basic,
+    "site_page1": sitebars.site_page1
 }
+
+
 
 if 'meta' not in st.session_state:
     st.session_state['meta'] = {}
