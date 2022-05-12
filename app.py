@@ -9,7 +9,8 @@ import logging
 import datetime
 
 
-import streamlit_authenticator as stauth
+sys.path.append(str(pathlib.Path().absolute()).split("/model")[0] + "/model")
+
 
 # pre-init session states:
 #We safe the argparse object in the session_state for later use
@@ -23,16 +24,20 @@ st.set_page_config(
 
 import pages.home
 import pages.page1
+import pages.gan_01
 import sitebars.basic
 import sitebars.site_page1
+import sitebars.gan_01_bar
 
 PAGES = {
     "Home": pages.home,
+    "Simple 1D GAN": pages.gan_01,
     "Page 1": pages.page1
 }
 
 SIDEBARS = {
     "basic": sitebars.basic,
+    "gan_01_bar": sitebars.gan_01_bar,
     "site_page1": sitebars.site_page1
 }
 
@@ -44,6 +49,10 @@ if 'meta' not in st.session_state:
 if 'load_date' not in st.session_state['meta']:
     st.session_state['meta']['load_date'] = datetime.datetime.now()
 
+if 'model' not in st.session_state:
+    st.session_state['model'] = {}
+    st.session_state['model']['name'] = None
+    st.session_state['model']['model'] = None
 
 def main():
 
