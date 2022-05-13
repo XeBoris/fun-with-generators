@@ -6,3 +6,4 @@ tensorflow-cpu==2.8.0
 keras==2.8.0
 pathlib
 matplotlib==3.5.2
+plotly==5.8.0

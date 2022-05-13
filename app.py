@@ -32,7 +32,7 @@ import sitebars.gan_01_bar
 PAGES = {
     "Home": pages.home,
     "Simple 1D GAN": pages.gan_01,
-    "Page 1": pages.page1
+    # "Page 1": pages.page1
 }
 
 SIDEBARS = {
@@ -53,6 +53,8 @@ if 'model' not in st.session_state:
     st.session_state['model'] = {}
     st.session_state['model']['name'] = None
     st.session_state['model']['model'] = None
+    st.session_state['model']['store'] = {}
+
 
 def main():
 
