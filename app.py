@@ -15,7 +15,7 @@ sys.path.append(str(pathlib.Path().absolute()).split("/model")[0] + "/model")
 # pre-init session states:
 #We safe the argparse object in the session_state for later use
 st.set_page_config(
-    page_title="Test-Me-App",
+    page_title="Fun-With-Generators",
     page_icon=None,
     # layout="centered",
     layout="wide"
