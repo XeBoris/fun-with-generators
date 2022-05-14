@@ -172,9 +172,6 @@ def plot_xy(fake=np.zeros((1,1)),
 
 
     if len(kk)>0:
-        st.write(f"Summary of {len(kk.T)} generated parables from the GAN 1D")
-
-
         fig = make_subplots(rows=1, cols=2)
         s1 = go.Scatter(x=x_fake,
                         y=kksum/len(kk.T),
@@ -206,7 +203,7 @@ def plot_xy(fake=np.zeros((1,1)),
             width=1024,
             height=450,
             title={
-                'text': "",
+                'text': f"Summary of {len(kk.T)} generated parables from the GAN 1D",
             }
         )
         st.write(fig)

@@ -20,14 +20,15 @@ def write(show_token=None, sidebar={}, sh=None):
 
     gen_use = st.session_state['model']['model']
 
-    if st.button('Generate'):
-        pass
-    else:
-        pass
-    if st.button('Reset'):
-        st.session_state['model']['store']['histo_diff'] = []
-    else:
-        pass
+    col1, col2, col3 = st.columns([1,1,1])
+    with col1:
+        st.button('Generate')
+
+    with col2:
+        if st.button('Reset') or len(st.session_state['model']['store']['histo_diff']) > 50:
+            st.session_state['model']['store']['histo_diff'] = []
+        else:
+            pass
 
 
     char_dict = {'sinus': 1, 'para': 2, 'exp': 3}
@@ -48,7 +49,7 @@ def write(show_token=None, sidebar={}, sh=None):
     plot_xy(fake_xy, real_xy)
     # plot_xy(real_xy)
 
-
+    
 
 
 if __name__ == "__main__":
