@@ -20,6 +20,9 @@ def write(show_token=None, sidebar={}, sh=None):
 
     gen_use = st.session_state['model']['model']
 
+    if 'histo_diff' not in st.session_state['model']['store']:
+        st.session_state['model']['store']['histo_diff'] = []
+
     col1, col2, col3 = st.columns([1,1,1])
     with col1:
         st.button('Generate')
@@ -49,7 +52,7 @@ def write(show_token=None, sidebar={}, sh=None):
     plot_xy(fake_xy, real_xy)
     # plot_xy(real_xy)
 
-    
+
 
 
 if __name__ == "__main__":
