@@ -100,6 +100,45 @@ def generate_fake(model=None,
         m = model(z_prime)
         return m, label, char, z
 
+def generate_fake_lite(model=None,
+                       batch_size=1,
+                       signal_length=10,
+                       style_enc=[{}]):
+    """
+    We generate a fake signal from a generator model
+    """
+
+    # We need a latent vector:
+    z = generate_latent(batch_size=batch_size,
+                        latent_size=signal_length,
+                        dim=2)
+
+    # The generated signal is always known as false, here
+    # comes the label:
+    label = np.zeros((batch_size*signal_length, 1))
+
+
+    # Encode the style from a <style_length> x 1 vector to a
+    # <signal_length> x <style_length> vector
+    char = np.full((batch_size*signal_length, len(style_enc)), style_enc)
+
+    z_prime = np.hstack((z, char))
+
+    if model is None:
+        return [], label, char, z
+    else:
+        gen, gen_in, gen_out = model
+        gen.resize_tensor_input(gen_in[0]["index"], [int(batch_size*signal_length), 4])
+        gen.allocate_tensors()
+
+        z_prime = z_prime.astype(np.float32)
+
+        gen.set_tensor(gen_in[0]['index'], z_prime)
+        gen.invoke()
+        r = gen.get_tensor(gen_out[0]['index'])
+        r = np.squeeze(r)
+
+        return r, label, char, z
 
 
 def plot_xy(fake=np.zeros((1,1)),
